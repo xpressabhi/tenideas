@@ -5,14 +5,11 @@ import { check } from 'meteor/check';
 import { Lists } from './lists.js';
 
 Meteor.methods({
-  'lists.insert'(title, url) {
-    check(url, String);
+  'lists.insert'(title) {
     check(title, String);
 
     return Lists.insert({
-      url,
-      title,
-      createdAt: new Date(),
+      title:title
     });
   },
 });
