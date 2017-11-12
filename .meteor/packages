@@ -28,8 +28,8 @@ johanbrook:publication-collector  # Test a Meteor publication by collecting its 
 #meteortoys:allthings
 check
 momentjs:moment
-#aldeed:collection2
-#aldeed:autoform
+aldeed:collection2-core@2.0.0
+aldeed:autoform
 accounts-password
 accounts-base
 raix:handlebar-helpers
@@ -46,9 +46,6 @@ useraccounts:bootstrap
 dynamic-import
 planefy:paypal-ipn-listener
 useraccounts:flow-routing
-mdg:geolocation
-dburles:google-maps
-nimble:restivus
 tmeasday:presence
 meteorhacks:aggregate
 natestrauser:connection-banner
