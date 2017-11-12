@@ -1,4 +1,12 @@
 <template name="App_home">
+  {{#if currentUser}}
+  {{#if isInRole 'admin'}}
+    <p class="lead">You are an admin.</p>
+  {{/if}}
   {{> hello}}
   {{> info}}
+  {{else}}
+  <p class="lead">Login first.</p>
+  {{/if}}
+
 </template>

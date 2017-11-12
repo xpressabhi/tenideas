@@ -7,10 +7,11 @@ import '../../ui/pages/home/home.js';
 import '../../ui/pages/not-found/not-found.js';
 
 // Set up all routes in the app
+FlowRouter.triggers.enter([AccountsTemplates.ensureSignedIn]);
 FlowRouter.route('/', {
   name: 'App.home',
   action() {
-    BlazeLayout.render('App_body', { main: 'App_home' });
+    BlazeLayout.render('App_body', {nav:'nav', main: 'App_home'});
   },
 });
 
