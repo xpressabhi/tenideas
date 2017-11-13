@@ -9,7 +9,7 @@ Meteor.methods({
     check(title, String);
 
     return Lists.insert({
-      title:title
+      title:title,
     });
   },
 });

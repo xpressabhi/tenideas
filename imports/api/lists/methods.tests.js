@@ -14,9 +14,9 @@ if (Meteor.isServer) {
     });
 
     it('can add a new link', function () {
-      const addLink = Meteor.server.method_handlers['lists.insert'];
+      const addList = Meteor.server.method_handlers['lists.insert'];
 
-      addLink.apply({}, ['meteor.com', 'https://www.meteor.com']);
+      addList.apply({}, ['meteor.com']);
 
       assert.equal(Lists.find().count(), 1);
     });

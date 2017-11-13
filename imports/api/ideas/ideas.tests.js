@@ -9,11 +9,11 @@ import { Ideas } from './ideas.js';
 if (Meteor.isServer) {
   describe('ideas collection', function () {
     it('insert correctly', function () {
-      const linkId = Ideas.insert({
+      const ideaId = Ideas.insert({
+        listId: 'abcd1234',
         title: 'meteor homepage',
-        url: 'https://www.meteor.com',
       });
-      const added = Ideas.find({ _id: linkId });
+      const added = Ideas.find({ _id: ideaId });
       const collectionName = added._getCollectionName();
       const count = added.count();
 

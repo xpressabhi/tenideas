@@ -9,11 +9,10 @@ import { Lists } from './lists.js';
 if (Meteor.isServer) {
   describe('lists collection', function () {
     it('insert correctly', function () {
-      const linkId = Lists.insert({
-        title: 'meteor homepage',
-        url: 'https://www.meteor.com',
+      const listId = Lists.insert({
+        title: 'meteor homepage'
       });
-      const added = Lists.find({ _id: linkId });
+      const added = Lists.find({ _id: listId });
       const collectionName = added._getCollectionName();
       const count = added.count();
 

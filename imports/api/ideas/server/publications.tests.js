@@ -11,8 +11,8 @@ describe('ideas publications', function () {
   beforeEach(function () {
     Ideas.remove({});
     Ideas.insert({
-      title: 'meteor homepage',
-      url: 'https://www.meteor.com',
+      listId: 'meteor homepage',
+      text: 'https://www.meteor.com',
     });
   });
 

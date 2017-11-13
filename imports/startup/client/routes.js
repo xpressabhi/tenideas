@@ -17,14 +17,21 @@ FlowRouter.route('/', {
   },
 });
 FlowRouter.route('/lists', {
-  name: 'App.home',
+  name: 'Lists',
   action() {
     BlazeLayout.render('App_body', {nav:'nav', main: 'Lists'});
   },
 });
 
 FlowRouter.route('/ideas', {
-  name: 'App.home',
+  name: 'Ideas',
+  action() {
+    BlazeLayout.render('App_body', {nav:'nav', main: 'Ideas'});
+  },
+});
+
+FlowRouter.route('/ideas/:id', {
+  name: 'Ideas.List',
   action() {
     BlazeLayout.render('App_body', {nav:'nav', main: 'Ideas'});
   },

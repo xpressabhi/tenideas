@@ -1,6 +1,7 @@
 // Definition of the ideas collection
 import SimpleSchema from 'simpl-schema';
 import { Mongo } from 'meteor/mongo';
+SimpleSchema.extendOptions(['autoform']);
 
 export const Ideas = new Mongo.Collection('ideas');
 

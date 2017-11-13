@@ -11,8 +11,7 @@ describe('lists publications', function () {
   beforeEach(function () {
     Lists.remove({});
     Lists.insert({
-      title: 'meteor homepage',
-      url: 'https://www.meteor.com',
+      title: 'meteor homepage'
     });
   });
 

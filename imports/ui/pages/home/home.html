@@ -1,12 +1,13 @@
 <template name="App_home">
-  {{#if currentUser}}
-  {{#if isInRole 'admin'}}
-    <p class="lead">You are an admin.</p>
-  {{/if}}
-  {{> hello}}
-  {{> info}}
-  {{else}}
-  <p class="lead">Login first.</p>
-  {{/if}}
-
+  <div class="container">
+  <div class="jumbotron">
+    <h1>TenIdeas</h1>
+    <p>Sharpen your Idea muscle by creating list of ideas.
+      Be is carppy or good, just keep creating ideas daily, without any break.
+      <br> Become Idea Machine.
+     </p>
+  </div>
+  <p>This is some text.</p>
+  <p>This is another text.</p>
+</div>
 </template>

@@ -11,15 +11,18 @@
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="/">Home</a></li>
+          <li class="active" id="home"><a href="/">Home</a></li>
           {{#if currentUser}}
-          <li><a href="/lists">Lists</a></li>
-          <li><a href="/ideas">Ideas</a></li>
-          <li><a href="#">Offers</a></li>
+          <li id="lists"><a href="/lists">Lists</a></li>
+          <li id="ideas"><a href="/ideas">Ideas</a></li>
+          <li id="offers"><a href="/offers">Offers</a></li>
           {{/if}}
         </ul>
         <ul class="nav navbar-nav navbar-right">
           {{#if currentUser}}
+          <li> {{#if isInRole 'admin'}}
+            <a href="#">Admin</a>
+          {{/if}} </li>
           <li><a href="#" class="logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
           {{else}}
           <li><a href="{{pathFor 'join'}}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
