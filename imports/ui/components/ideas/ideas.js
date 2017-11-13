@@ -16,6 +16,9 @@ Template.ideas.helpers({
   //  console.log('counting');
     return Ideas.find({},{sort:{createdAt:-1}});
   },
+  ideaCount(){
+    return Ideas.find({}).count();
+  },
   createdDate(date){
     return moment(date).format('MMM Do YYYY hh:mm A');
   },

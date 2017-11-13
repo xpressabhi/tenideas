@@ -1,26 +1,33 @@
 <template name="ideas">
   {{#if list2Id}}
-  <p class="lead">Title: {{listTitle}}</p>
-  <form class="idea-add">
-    <div class="form-group">
-      <label for="email">Text:</label>
-      <input type="text" name="text" class="form-control" placeholder="Text" required>
-    </div>
-    <input type="submit" name="submit" class="btn btn-default" value="Add new Idea">
-  </form>
+    <p class="lead">Title:
+      {{listTitle}}</p>
+    <form class="idea-add">
+      <div class="form-group">
+        <label for="email">Text:</label>
+        <input type="text" name="text" class="form-control" placeholder="Text" required="required">
+      </div>
+      <input type="submit" name="submit" class="btn btn-default" value="Add new Idea">
+    </form>
   {{/if}}
-<br>
+  <br>
+  Total Count : {{ideaCount}} <br>
   <ul class="list-group">
     {{#each ideas}}
-      <li class="list-group-item">{{text}} {{#unless list2Id}}
-        <a href="/ideas/{{listId}}">Open list this idea belongs</a>
-      {{/unless}}  </li>
-{{else}}
-{{#if list2Id}}
-<li class="list-group-item">No ideas add to {{listName}}.</li>
-{{else}}
-<li class="list-group-item">Create list to add ideas. <a href="/lists">Go here</a> </li>
-{{/if}}
+      <li class="list-group-item">{{text}}
+        {{#unless list2Id}}
+          <a href="/ideas/{{listId}}">Open list this idea belongs</a>
+        {{/unless}}
+      </li>
+    {{else}}
+      {{#if list2Id}}
+        <li class="list-group-item">No ideas add to
+          {{listName}}.</li>
+      {{else}}
+        <li class="list-group-item">Create list to add ideas.
+          <a href="/lists">Go here</a>
+        </li>
+      {{/if}}
 
     {{/each}}
   </ul>
