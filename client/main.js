@@ -10,6 +10,37 @@ AccountsTemplates.configure({
   defaultLayoutRegions: {nav: 'nav'}
 });
 
+AccountsTemplates.addField({
+  _id: 'firstName',
+  type: 'text',
+  displayName: 'First Name',
+  required: true,
+  minLength: 4,
+  maxLength: 30,
+  re: /^[a-zA-Z0-9]+$/,
+  trim: true,
+  placeholder: {
+    signUp: "First Name",
+    signIn: "First Name"
+  }
+});
+AccountsTemplates.addField({
+  _id: 'lastName',
+  type: 'text',
+  displayName: 'Last Name',
+  required: true,
+  minLength: 4,
+  maxLength: 30,
+  trim: true,
+  re: /^[a-z0-9]+$/,
+  trim: true,
+  placeholder: {
+    signUp: "Last Name",
+    signIn: "Last Name"
+  }
+});
+
+
 AccountsTemplates.configureRoute('signIn', {
   name: 'signin',
   path: '/signin',
