@@ -25,9 +25,13 @@ Template.nav.events({
     $('#ideas').addClass("active");
     $('#ideas').siblings().removeClass("active");
   },
-  'click #offers':()=>{
-    $('#offers').addClass("active");
-    $('#offers').siblings().removeClass("active");
+  'click #samples':()=>{
+    $('#samples').addClass("active");
+    $('#samples').siblings().removeClass("active");
+  },
+  'click #summary':()=>{
+    $('#summary').addClass("active");
+    $('#summary').siblings().removeClass("active");
   }
 
 });
