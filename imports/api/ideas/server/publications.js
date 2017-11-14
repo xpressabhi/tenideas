@@ -1,19 +1,34 @@
 // All ideas-related publications
 
-import { Meteor } from 'meteor/meteor';
-import { Ideas } from '../ideas.js';
+import {Meteor} from 'meteor/meteor';
+import {Ideas} from '../ideas.js';
 
-Meteor.publish('ideas.all', function (listId,includeHidden) {
-if (includeHidden) {
-  if(listId){
-  return Ideas.find({listId:listId});
+Meteor.publish('ideas.all', function(listId, includeHidden) {
+  if (!this.userId) {
+    return this.ready();
   }
-  return Ideas.find({});
-}else {
-  if(listId){
-  return Ideas.find({listId:listId, hide:{$ne:true}});
+
+  if (includeHidden) {
+    if (listId) {
+      return Ideas.find({userId: this.userId, listId: listId});
+    }
+    return Ideas.find({userId: this.userId});
+  } else {
+    if (listId) {
+      return Ideas.find({
+        userId: this.userId,
+        listId: listId,
+        hide: {
+          $ne: true
+        }
+      });
+    }
+    return Ideas.find({
+      userId: this.userId,
+      hide: {
+        $ne: true
+      }
+    });
   }
-  return Ideas.find({hide:{$ne:true}});
-}
 
 });

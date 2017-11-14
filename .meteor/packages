@@ -26,6 +26,7 @@ practicalmeteor:mocha             # A package for writing and running your meteo
 johanbrook:publication-collector  # Test a Meteor publication by collecting its output
 
 #meteortoys:allthings
+#babrahams:constellation
 check
 momentjs:moment
 aldeed:collection2-core@2.0.0
@@ -47,3 +48,4 @@ tmeasday:presence
 meteorhacks:aggregate
 natestrauser:connection-banner
 arillo:flow-router-helpers
+#constellation:dump-restore
