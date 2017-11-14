@@ -8,6 +8,10 @@ Lists.schema = new SimpleSchema({
   title:{
     type:String
   },
+  hide:{
+    type:Boolean,
+    defaultValue:false
+  },
   createdAt: {
     type: Date,
     autoValue: function() {

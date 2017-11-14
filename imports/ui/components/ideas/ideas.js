@@ -5,8 +5,9 @@ import './ideas.html';
 
 Template.ideas.onCreated(function () {
   const self=this;
+  self.includeHidden = new ReactiveVar(false);
   self.autorun(()=>{
-      Meteor.subscribe('ideas.all',FlowRouter.getParam('id'));
+      Meteor.subscribe('ideas.all',FlowRouter.getParam('id'),self.includeHidden.get());
       Meteor.subscribe('lists.one',FlowRouter.getParam('id'));
   });
 });
@@ -19,6 +20,22 @@ Template.ideas.helpers({
   ideaCount(){
     return Ideas.find({}).count();
   },
+  allowToAdd(){
+    if(FlowRouter.getParam('id') && Ideas.find({}).count() < 10)
+    return true;
+    return false;
+  },
+  timeLapsed(){
+    const createdAt = Lists.findOne({_id:FlowRouter.getParam('id')}).createdAt;
+    console.log(createdAt);
+    console.log(new Date());
+    return moment(new Date()).diff(moment(createdAt),'minutes');
+  },
+  timeTakenforTen(){
+    const createdAt = Lists.findOne({_id:FlowRouter.getParam('id')}).createdAt;
+    const lastAdded = Ideas.findOne({listId:FlowRouter.getParam('id')},{sort:{createdAt:-1}}).createdAt;
+    return moment(lastAdded).diff(createdAt,'minutes');
+  },
   createdDate(date){
     return moment(date).format('MMM Do YYYY hh:mm A');
   },
@@ -27,7 +44,7 @@ Template.ideas.helpers({
     return FlowRouter.getParam('id');
   },
   listTitle(){
-    return Lists.findOne({}).title;
+    return Lists.findOne({_id:FlowRouter.getParam('id')}).title;
   }
 });
 
@@ -47,4 +64,25 @@ Template.ideas.events({
       }
     });
   },
+  'click .hideIdea'(event){
+    console.log(this._id);
+    Meteor.call('ideas.hide',this._id, (error)=>{
+      if (error) {
+        console.log(error);
+      //  alert(error.error);
+      }
+    })
+  },
+  'click .showIdea'(event){
+    console.log(this._id);
+    Meteor.call('ideas.show',this._id, (error)=>{
+      if (error) {
+        console.log(error);
+      //  alert(error.error);
+      }
+    })
+  },
+  'click .toggleHidden'(e,t){
+    t.includeHidden.set(!t.includeHidden.get());
+  }
 });

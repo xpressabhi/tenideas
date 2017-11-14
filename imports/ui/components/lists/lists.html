@@ -1,19 +1,16 @@
 <template name="lists">
   <form class="list-add">
     <div class="form-group">
-      <label for="email">Title:</label>
-      <input type="text" name="title" class="form-control" placeholder="Title" required>
+      <input type="text" name="title" class="form-control input-lg" placeholder="10 Ideas for ..." required>
     </div>
-    <input type="submit" name="submit" class="btn btn-default" value="Add new list">
+    <input type="submit" name="submit" class="btn btn-primary btn-lg btn-block" value="Create list">
   </form>
   <br>
-  <ul class="list-group">
     {{#each lists}}
-      <li class="list-group-item">{{createdDate createdAt}} >> {{title}} <br>
-<a href="/ideas/{{_id}}">Add Idea</a>
-       </li>
+      <p class="lead">{{createdDate createdAt}} # <a href="/ideas/{{_id}}">{{title}}</a>
+      </p> <hr>
        {{else}}
-       <li class="list-group-item">No List created.</li>
+       <p class="lead">No List created.</p>
     {{/each}}
-  </ul>
+
 </template>

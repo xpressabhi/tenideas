@@ -14,4 +14,20 @@ Meteor.methods({
       text:text
     });
   },
+  'ideas.hide'(ideaId){
+    check(ideaId, String);
+    return Ideas.update({_id:ideaId},{
+      $set:{
+        hide:true
+      }
+    });
+  },
+  'ideas.show'(ideaId){
+    check(ideaId, String);
+    return Ideas.update({_id:ideaId},{
+      $set:{
+        hide:false
+      }
+    });
+  }
 });

@@ -12,6 +12,10 @@ Ideas.schema = new SimpleSchema({
   text:{
     type:String
   },
+  hide:{
+    type:Boolean,
+    defaultValue:false
+  },
   createdAt: {
     type: Date,
     autoValue: function() {
