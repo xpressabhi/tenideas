@@ -25,11 +25,18 @@
 
     {{/if}}
   {{else}}
-    <p class="lead">Ideas from all lists.</p>
+  {{#if listPresent}}
+  <p class="lead">Ideas from all lists.</p>
+    {{else}}
+    <p class="lead">No such list. Create one to start.</p>
+  {{/if}}
+
   {{/if}}
   <br>
   {{#if allowToAdd}}
+  {{#if listPresent}}
   <p class="lead">Ideas added to list #{{ideaCount}}</p>
+  {{/if}}
     {{/if}}
   <a href="/lists" class="btn btn-info">Go to Lists</a>
   {{#each ideas}}

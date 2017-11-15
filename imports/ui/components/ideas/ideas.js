@@ -14,6 +14,9 @@ Template.ideas.onCreated(function () {
 });
 
 Template.ideas.helpers({
+  listPresent(){
+    return Lists.find({}).count() > 0;
+  },
   ideas() {
   //  console.log('counting');
     return Ideas.find({},{sort:{createdAt:-1}});
@@ -28,8 +31,6 @@ Template.ideas.helpers({
   },
   timeLapsed(){
     const createdAt = Lists.findOne({_id:FlowRouter.getParam('id')}).createdAt;
-    console.log(createdAt);
-    console.log(new Date());
     return moment(new Date()).diff(moment(createdAt),'minutes');
   },
   timeTakenforTen(){
@@ -41,11 +42,14 @@ Template.ideas.helpers({
     return moment(date).format('MMM Do YYYY hh:mm A');
   },
   list2Id(){
-    console.log(FlowRouter.getParam('id'));
-    return FlowRouter.getParam('id');
+    const list =Lists.findOne({_id:FlowRouter.getParam('id')});
+    if(list) return list._id;
+    return null;
   },
   listTitle(){
-    return Lists.findOne({_id:FlowRouter.getParam('id')}).title;
+    const list =Lists.findOne({_id:FlowRouter.getParam('id')});
+    if(list) return list.title;
+    return null;
   },
   textLength(){
     return Template.instance().textLength.get();
