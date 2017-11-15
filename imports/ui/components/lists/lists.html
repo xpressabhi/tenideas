@@ -1,14 +1,24 @@
 <template name="lists">
   <form class="list-add">
     <div class="form-group">
-      <input type="text" name="title" class="form-control input-lg" placeholder="10 Ideas for ..." required>
+      {{#unless titleSave}}
+      <p class="lead">  Shorten text length by {{shortenBy}} to create list.</p>
+      {{/unless}}
+      <textarea id="titleId" class="form-control input-lg" name="title" placeholder="10 Ideas for ... (write in max 10 words)." rows="3" required></textarea>
+      <!-- <input type="text" name="title2" class="form-control input-lg" placeholder="10 Ideas for ..." required> -->
     </div>
-    <input type="submit" name="submit" class="btn btn-primary btn-lg btn-block" value="Create list">
+    <input type="submit" name="submit" class="btn {{#if titleSave}}
+      btn-primary
+      {{else}}
+      btn-danger
+    {{/if}} btn-lg btn-block {{#unless titleSave}}
+      disabled
+    {{/unless}}" value="Create list">
   </form>
   <br>
-    {{#each lists}}
+    {{#each lists}}<hr>
       <p class="lead">{{createdDate createdAt}} # <a href="/ideas/{{_id}}">{{title}}</a>
-      </p> <hr>
+      </p>
        {{else}}
        <p class="lead">No List created.</p>
     {{/each}}

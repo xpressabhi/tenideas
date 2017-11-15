@@ -8,7 +8,7 @@ Template.nav.onCreated(function navOnCreated() {
 Template.nav.helpers({
  name(){
    const user = Meteor.user();
-   console.log(user);
+  // console.log(user);
    return user && user.profile && user.profile.firstName;
  }
 });

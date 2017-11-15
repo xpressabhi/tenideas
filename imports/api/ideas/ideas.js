@@ -10,7 +10,8 @@ Ideas.schema = new SimpleSchema({
     type:String
   },
   text:{
-    type:String
+    type:String,
+    max: 100
   },
   hide:{
     type:Boolean,

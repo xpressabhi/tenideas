@@ -6,7 +6,8 @@ export const Lists = new Mongo.Collection('lists');
 
 Lists.schema = new SimpleSchema({
   title:{
-    type:String
+    type:String,
+    max: 100
   },
   hide:{
     type:Boolean,

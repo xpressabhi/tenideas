@@ -6,6 +6,7 @@ import './ideas.html';
 Template.ideas.onCreated(function () {
   const self=this;
   self.includeHidden = new ReactiveVar(false);
+  this.textLength = new ReactiveVar(0);
   self.autorun(()=>{
       Meteor.subscribe('ideas.all',FlowRouter.getParam('id'),self.includeHidden.get());
       Meteor.subscribe('lists.one',FlowRouter.getParam('id'));
@@ -45,24 +46,38 @@ Template.ideas.helpers({
   },
   listTitle(){
     return Lists.findOne({_id:FlowRouter.getParam('id')}).title;
+  },
+  textLength(){
+    return Template.instance().textLength.get();
+  },
+  textSave(){
+    return Template.instance().textLength.get() <= 100;
+  },
+  shortenBy(){
+    return Template.instance().titleLength.get() - 100;
   }
 });
 
 Template.ideas.events({
+  'keyup [name="text"]' (event, template) {
+    let value = event.target.value.trim();
+    template.textLength.set(value.length);
+  },
   'submit .idea-add'(event) {
     event.preventDefault();
-
     const target = event.target;
-    const text = target.text;
-    console.log(text.value);
-    Meteor.call('ideas.insert', FlowRouter.getParam('id'),text.value, (error) => {
-      if (error) {
-        console.log(error);
-      //  alert(error.error);
-      } else {
-        text.value = '';
-      }
-    });
+    const text = target.text.value.trim();
+    if (text.length <=100) {
+      Meteor.call('ideas.insert', FlowRouter.getParam('id'),text, (error) => {
+        if (error) {
+          console.log(error);
+        //  alert(error.error);
+        } else {
+          text = '';
+        }
+      });
+    }
+
   },
   'click .hideIdea'(event){
     console.log(this._id);
