@@ -31,3 +31,13 @@ Meteor.publish('lists.one', function(listId) {
     }
   });
 });
+
+Meteor.publish('listsCount', function(id) {
+  if (!this.userId) {
+    return this.ready();
+  }
+  if (!Roles.userIsInRole(this.userId, 'admin')) {
+    return this.ready();
+  }
+  Counts.publish(this, 'lists', Lists.find());
+});

@@ -32,3 +32,13 @@ Meteor.publish('ideas.all', function(listId, includeHidden) {
   }
 
 });
+
+Meteor.publish('ideasCount', function(id) {
+  if (!this.userId) {
+    return this.ready();
+  }
+  if (!Roles.userIsInRole(this.userId, 'admin')) {
+    return this.ready();
+  }
+  Counts.publish(this, 'ideas', Ideas.find());
+});

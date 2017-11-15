@@ -4,6 +4,7 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 // Import needed templates
 import '../../ui/layouts/body/body.js';
 import '../../ui/pages/home/home.js';
+import '../../ui/pages/dash/dash.js';
 import '../../ui/pages/Lists/lists.js';
 import '../../ui/pages/Ideas/ideas.js';
 import '../../ui/pages/samples/samples.js';
@@ -17,6 +18,15 @@ FlowRouter.route('/', {
     BlazeLayout.render('App_body', {nav:'nav', main: 'App_home'});
   },
 });
+
+FlowRouter.route('/dash', {
+  name: 'Dashboard',
+  triggersEnter: [AccountsTemplates.ensureSignedIn],
+  action() {
+    BlazeLayout.render('App_body', {nav:'nav', main: 'Dash'});
+  },
+});
+
 FlowRouter.route('/lists', {
   name: 'Lists',
   triggersEnter: [AccountsTemplates.ensureSignedIn],
