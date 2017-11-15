@@ -15,7 +15,15 @@ Template.ideas.onCreated(function () {
 
 Template.ideas.helpers({
   listPresent(){
-    return Lists.find({}).count() > 0;
+    if(FlowRouter.getParam('id')){
+      if (Lists.find({}).count() > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }else {
+     return true;
+    }
   },
   ideas() {
   //  console.log('counting');

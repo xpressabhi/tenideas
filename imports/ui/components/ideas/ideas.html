@@ -3,14 +3,18 @@
     <h3>10 ideas for
       {{listTitle}}</h3>
     {{#if allowToAdd}}
-    <p class="lead">Time elapsed since list created: {{timeLapsed}} minutes</p>
+      <p class="lead">Time elapsed since list created:
+        {{timeLapsed}}
+        minutes</p>
       <form class="idea-add">
         <div class="form-group">
           {{#unless textSave}}
-            <p class="lead">  Shorten idea length by {{shortenBy}} to add.</p>
+            <p class="lead">
+              Shorten idea length by
+              {{shortenBy}}
+              to add.</p>
           {{/unless}}
-          <textarea class="form-control input-lg" name="text" placeholder="I will ... (write in max 10 words)." rows="3" required></textarea>
-          <!-- <input type="text" name="text" class="form-control input-lg" placeholder="I will.." required="required"> -->
+          <textarea class="form-control input-lg" name="text" placeholder="I will ... (write in max 10 words)." rows="3" required="required"></textarea>
         </div>
         <input type="submit" name="submit" class="btn {{#if textSave}}
           btn-primary
@@ -21,43 +25,37 @@
         {{/unless}}" value="Add Idea">
 
       </form>
-      {{else}} <p class="lead">Added 10 ideas in {{timeTakenforTen}} minutes.</p>
+    {{else}}
+      <p class="lead">Added 10 ideas in
+        {{timeTakenforTen}}
+        minutes.</p>
 
     {{/if}}
   {{else}}
-  {{#if listPresent}}
-  <p class="lead">Ideas from all lists.</p>
+    {{#if listPresent}}
+      <p class="lead">Ideas from all lists.</p>
     {{else}}
-    <p class="lead">No such list. Create one to start.</p>
-  {{/if}}
+      <p class="lead">No such list. Create one to start.</p>
+    {{/if}}
 
   {{/if}}
   <br>
   {{#if allowToAdd}}
-  {{#if listPresent}}
-  <p class="lead">Ideas added to list #{{ideaCount}}</p>
-  {{/if}}
+    {{#if listPresent}}
+      <p class="lead">Ideas added to list #{{ideaCount}}</p>
     {{/if}}
+  {{/if}}
   <a href="/lists" class="btn btn-info">Go to Lists</a>
   {{#each ideas}}
-  <hr>
-    <p class="lead">
-      <!-- {{#unless hide}} <i class="fa fa-eye-slash hideIdea" aria-hidden="true"></i> {{else}} <i class="fa fa-eye showIdea" aria-hidden="true"></i> {{/unless}} -->
-
-      {{#unless list2Id}}
-        <!-- <a href="/ideas/{{listId}}">
-          <i class="fa fa-link" aria-hidden="true"></i>
-        </a> -->
-      {{/unless}}
-      {{text}}</p>
-
+    <hr>
+    <p class="lead">{{text}}</p>
   {{else}}
     <p class="lead">
       {{#if list2Id}}
         No ideas add to
         {{listName}}.
-      {{else}}
-        Create list to add ideas.
+      {{else}}<hr>
+        Create a list to add ideas.
         <a href="/lists">Go here</a>
       {{/if}}
     </p>
