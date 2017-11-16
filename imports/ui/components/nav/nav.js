@@ -17,13 +17,17 @@ Template.nav.events({
   'click .logout': () => {
     AccountsTemplates.logout();
   },
+  'click #title':()=>{
+    $('.navbar-nav>li').removeClass("active");
+  },
   'click #lists':()=>{
     $('#lists').addClass("active");
+    console.log(window.location.pathname);
     $('#lists').siblings().removeClass("active");
   },
-  'click #home':()=>{
-    $('#home').addClass("active");
-    $('#home').siblings().removeClass("active");
+  'click #dash':()=>{
+    $('#dash').addClass("active");
+    $('#dash').siblings().removeClass("active");
   },
   'click #ideas':()=>{
     $('#ideas').addClass("active");
