@@ -85,7 +85,7 @@ Template.ideas.events({
           console.log(error);
         //  alert(error.error);
         } else {
-          text = '';
+          target.text.value = '';
         }
       });
     }

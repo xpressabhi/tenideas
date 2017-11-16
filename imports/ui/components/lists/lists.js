@@ -49,7 +49,7 @@ Template.lists.events({
         } else {
           console.log(result);
           FlowRouter.go('/ideas/'+result);
-          title = '';
+          target.title.value = '';
         }
       });
     }
