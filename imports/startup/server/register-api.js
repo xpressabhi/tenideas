@@ -8,3 +8,6 @@ import '../../api/lists/server/publications.js';
 
 import '../../api/ideas/methods.js';
 import '../../api/ideas/server/publications.js';
+
+import '../../api/quotes/methods.js';
+import '../../api/quotes/server/publications.js';

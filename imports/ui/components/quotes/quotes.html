@@ -1,0 +1,33 @@
+<template name="quotes">
+  <form class="quote-add">
+    <div class="form-group">
+      <textarea class="form-control input-lg" name="title" placeholder="Title ... (write in max 10 words)." rows="2"></textarea>
+    </div>
+    <div class="form-group">
+      <textarea class="form-control input-lg" name="text" placeholder="Quote text ... (write in max 10 words)." rows="3" required="required"></textarea>
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control input-lg" name="saidBy" placeholder="Said by ...">
+    </div>
+    <input type="submit" name="submit" class="btn btn-primary btn-lg btn-block" value="Add Quote">
+
+  </form>
+  {{#each quotes}} <hr>
+  <div class="well well-lg">
+    <div class="toggleVisibility">
+      {{#if show}}
+        <span class="label label-success">Visible</span>
+      {{else}}
+      <span class="label label-danger">Hidden</span>
+      {{/if}}
+    </div>
+    <p class="lead">{{title}}</p>
+    <blockquote class="blockquote-reverse">
+      <p>“{{text}}”</p>
+      <footer>{{saidBy}}
+        <cite title="Source Title"></cite>
+      </footer>
+    </blockquote>
+  </div>
+  {{/each}}
+</template>

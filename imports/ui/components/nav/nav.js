@@ -29,6 +29,10 @@ Template.nav.events({
     $('#dash').addClass("active");
     $('#dash').siblings().removeClass("active");
   },
+  'click #quotes':()=>{
+    $('#quotes').addClass("active");
+    $('#quotes').siblings().removeClass("active");
+  },
   'click #ideas':()=>{
     $('#ideas').addClass("active");
     $('#ideas').siblings().removeClass("active");

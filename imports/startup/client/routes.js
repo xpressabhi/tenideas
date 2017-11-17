@@ -5,6 +5,7 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import '../../ui/layouts/body/body.js';
 import '../../ui/pages/home/home.js';
 import '../../ui/pages/dash/dash.js';
+import '../../ui/pages/quotes/quotes.js';
 import '../../ui/pages/Lists/lists.js';
 import '../../ui/pages/Ideas/ideas.js';
 import '../../ui/pages/samples/samples.js';
@@ -24,6 +25,13 @@ FlowRouter.route('/dash', {
   triggersEnter: [AccountsTemplates.ensureSignedIn],
   action() {
     BlazeLayout.render('App_body', {nav:'nav', main: 'Dash'});
+  },
+});
+FlowRouter.route('/quotes', {
+  name: 'Quotes',
+  triggersEnter: [AccountsTemplates.ensureSignedIn],
+  action() {
+    BlazeLayout.render('App_body', {nav:'nav', main: 'Quotes'});
   },
 });
 

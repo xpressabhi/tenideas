@@ -5,3 +5,6 @@
   display:block;
   cursor: pointer;
 }
+.toggleVisibility{
+  cursor: pointer;
+}
