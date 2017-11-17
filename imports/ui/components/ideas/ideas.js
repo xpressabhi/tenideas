@@ -91,6 +91,14 @@ Template.ideas.events({
     }
 
   },
+  'click .removeIdea'(){
+    Meteor.call('ideas.remove',this._id, (error)=>{
+      if (error) {
+        console.log(error);
+      //  alert(error.error);
+      }
+    });
+  },
   'click .hideIdea'(event){
     console.log(this._id);
     Meteor.call('ideas.hide',this._id, (error)=>{
@@ -98,7 +106,7 @@ Template.ideas.events({
         console.log(error);
       //  alert(error.error);
       }
-    })
+    });
   },
   'click .showIdea'(event){
     console.log(this._id);
@@ -107,7 +115,7 @@ Template.ideas.events({
         console.log(error);
       //  alert(error.error);
       }
-    })
+    });
   },
   'click .toggleHidden'(e,t){
     t.includeHidden.set(!t.includeHidden.get());

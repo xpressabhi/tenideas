@@ -1,0 +1,7 @@
+.removeIdea{
+  display:none;
+}
+.ideaText:hover .removeIdea{
+  display:block;
+  cursor: pointer;
+}

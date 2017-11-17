@@ -14,6 +14,10 @@ Meteor.methods({
       text:text
     });
   },
+  'ideas.remove'(ideaId){
+    check(ideaId, String);
+    return Ideas.remove({_id:ideaId});
+  },
   'ideas.hide'(ideaId){
     check(ideaId, String);
     return Ideas.update({_id:ideaId},{

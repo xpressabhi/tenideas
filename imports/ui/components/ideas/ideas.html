@@ -48,7 +48,8 @@
   <a href="/lists" class="btn btn-info">Go to Lists</a>
   {{#each ideas}}
     <hr>
-    <p class="lead">{{text}}</p>
+    <p class="lead ideaText">{{text}} <i class="fa fa-times fa-lg pull-right removeIdea" data-toggle="tooltip" data-placement="top"
+   title="Remove me" aria-hidden="true"></i></p>
   {{else}}
     <p class="lead">
       {{#if list2Id}}
