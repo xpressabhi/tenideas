@@ -12,3 +12,9 @@ Meteor.publish('userCount', function(id) {
   }
   Counts.publish(this, 'users', Meteor.users.find());
 });
+
+Meteor.users.deny({
+  update: function() {
+    return true;
+  }
+});

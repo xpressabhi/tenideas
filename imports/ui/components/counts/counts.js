@@ -4,6 +4,7 @@ Template.counts.onCreated(function () {
   Meteor.subscribe('userCount');
   Meteor.subscribe('ideasCount');
   Meteor.subscribe('listsCount');
+  Meteor.subscribe('quotesCount');
 
 });
 
@@ -17,5 +18,8 @@ Template.counts.helpers({
   },
   lists: function() {
     return Counts.get('lists');
+  },
+  quotes: function() {
+    return Counts.get('quotes');
   }
 });

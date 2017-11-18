@@ -27,11 +27,11 @@ Template.quotes.events({
   'submit .quote-add'(event) {
     event.preventDefault();
     const target = event.target;
-    const title = target.title.value;
+    //const title = target.title.value;
     const text = target.text.value;
     const saidBy = target.saidBy.value;
     console.log();
-      Meteor.call('quotes.insert', title.trim(),text.trim(),saidBy.trim(), (error,result) => {
+      Meteor.call('quotes.insert', '' ,text.trim(),saidBy.trim(), (error,result) => {
         if (error) {
           console.log(error);
         //  alert(error.error);
