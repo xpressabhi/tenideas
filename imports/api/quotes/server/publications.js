@@ -11,9 +11,6 @@ Meteor.publish('quotes.all', function() {
 });
 
 Meteor.publish('quotes.one', function() {
-  if (!this.userId) {
-    return this.ready();
-  }
   const count = Quotes.find({show:true}).count();
   let skip = Math.floor(Math.random() * count);
   return Quotes.find({show:true}, {skip: skip, limit: 1});
