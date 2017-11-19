@@ -17,7 +17,7 @@ Template.lists.helpers({
     return Lists.find({},{sort:{createdAt:-1}});
   },
   createdDate(date){
-    return moment(date).format('MMM Do');
+    return moment(date).format('MMM Do YYYY');
   },
   titleLength(){
     return Template.instance().titleLength.get();

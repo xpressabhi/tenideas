@@ -8,3 +8,11 @@
 .toggleVisibility{
   cursor: pointer;
 }
+
+.hideDate{
+  display:none;
+}
+.listTitle:hover .hideDate{
+  display:block;
+  cursor: pointer;
+}

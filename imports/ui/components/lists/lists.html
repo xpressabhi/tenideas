@@ -18,11 +18,12 @@
     {{/unless}}" value="Create list">
   </form>
   <br>
-  {{#each lists}}<hr>
-    <p class="lead">{{createdDate createdAt}}
-      #
+  {{#each lists}}
+  <div class="listTitle">
+    <p class="lead"><span class="hideDate pull-right">{{createdDate createdAt}}</span>
       <a href="/ideas/{{_id}}">{{title}}</a>
     </p>
+    </div>
   {{else}}
     <p class="lead">No List created.</p>
   {{/each}}
