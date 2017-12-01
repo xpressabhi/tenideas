@@ -1,75 +1,99 @@
-import { Ideas } from '/imports/api/ideas/ideas.js';
-import { Lists } from '/imports/api/lists/lists.js';
-import { Meteor } from 'meteor/meteor';
+import {Ideas} from '/imports/api/ideas/ideas.js';
+import {Lists} from '/imports/api/lists/lists.js';
+import {Meteor} from 'meteor/meteor';
 import './ideas.html';
 
-Template.ideas.onCreated(function () {
-  const self=this;
+Template.ideas.onCreated(function() {
+  const self = this;
   self.includeHidden = new ReactiveVar(false);
   this.textLength = new ReactiveVar(0);
-  self.autorun(()=>{
-      Meteor.subscribe('ideas.all',FlowRouter.getParam('id'),self.includeHidden.get());
-      Meteor.subscribe('lists.one',FlowRouter.getParam('id'));
+  this.searchQuery = new ReactiveVar('');
+  this.searching = new ReactiveVar(false);
+
+  self.autorun(() => {
+    const id = FlowRouter.getParam('id');
+    self.subscribe('lists.one', id);
+    self.subscribe("ideas.all", id, this.searchQuery.get(), () => {
+      setTimeout(() => {
+        this.searching.set(false);
+      }, 300);
+    });
   });
 });
-Template.ideas.onRendered(function(){
+Template.ideas.onRendered(function() {
   $('input').focus();
 });
 
 Template.ideas.helpers({
-  listPresent(){
-    if(FlowRouter.getParam('id')){
+  listPresent() {
+    if (FlowRouter.getParam('id')) {
       if (Lists.find({}).count() > 0) {
         return true;
       } else {
         return false;
       }
-    }else {
-     return true;
+    } else {
+      return true;
     }
   },
   ideas() {
-  //  console.log('counting');
-    return Ideas.find({},{sort:{createdAt:-1}});
+    //  console.log('counting');
+    return Ideas.find({}, {
+      sort: {
+        createdAt: -1
+      }
+    });
   },
-  ideaCount(){
+  ideaCount() {
     return Ideas.find({}).count();
   },
-  allowToAdd(){
-    if(FlowRouter.getParam('id') && Ideas.find({}).count() < 10)
-    return true;
+  allowToAdd() {
+    if (FlowRouter.getParam('id') && Ideas.find({}).count() < 10)
+      return true;
     return false;
   },
-  timeLapsed(){
-    const createdAt = Lists.findOne({_id:FlowRouter.getParam('id')}).createdAt;
-    return moment(new Date()).diff(moment(createdAt),'minutes');
+  timeLapsed() {
+    const createdAt = Lists.findOne({_id: FlowRouter.getParam('id')}).createdAt;
+    return moment(new Date()).diff(moment(createdAt), 'minutes');
   },
-  timeTakenforTen(){
-    const createdAt = Lists.findOne({_id:FlowRouter.getParam('id')}).createdAt;
-    const lastAdded = Ideas.findOne({listId:FlowRouter.getParam('id')},{sort:{createdAt:-1}}).createdAt;
-    return moment(lastAdded).diff(createdAt,'minutes');
+  timeTakenforTen() {
+    const createdAt = Lists.findOne({_id: FlowRouter.getParam('id')}).createdAt;
+    const lastAdded = Ideas.findOne({
+      listId: FlowRouter.getParam('id')
+    }, {
+      sort: {
+        createdAt: -1
+      }
+    }).createdAt;
+    return moment(lastAdded).diff(createdAt, 'minutes');
   },
-  createdDate(date){
+  createdDate(date) {
     return moment(date).format('MMM Do YYYY hh:mm A');
   },
-  list2Id(){
-    const list =Lists.findOne({_id:FlowRouter.getParam('id')});
-    if(list) return list._id;
+  list2Id() {
+    const list = Lists.findOne({_id: FlowRouter.getParam('id')});
+    if (list)
+      return list._id;
     return null;
   },
-  listTitle(){
-    const list =Lists.findOne({_id:FlowRouter.getParam('id')});
-    if(list) return list.title;
+  listTitle() {
+    const list = Lists.findOne({_id: FlowRouter.getParam('id')});
+    if (list)
+      return list.title;
     return null;
   },
-  textLength(){
+  textLength() {
     return Template.instance().textLength.get();
   },
-  textSave(){
+  textSave() {
     return Template.instance().textLength.get() <= 100;
   },
-  shortenBy(){
+  shortenBy() {
     return Template.instance().textLength.get() - 100;
+  },
+  searching() {
+    console.log('reading');
+    return Template.instance().searching.get();
   }
 });
 
@@ -78,49 +102,58 @@ Template.ideas.events({
     let value = event.target.value.trim();
     template.textLength.set(value.length);
   },
-  'submit .idea-add'(event) {
+  'keyup [name="search"]' (event, template) {
+    let value = event.target.value.trim();
+  //  console.log(value);
+    if (!value || value === '')
+      value = '';
+      template.searching.set(true);
+      template.searchQuery.set(value);
+  },
+  'submit .idea-add' (event) {
     event.preventDefault();
     const target = event.target;
     const text = target.text.value.trim();
-    if (text.length <=100) {
-      Meteor.call('ideas.insert', FlowRouter.getParam('id'),text, (error) => {
+    if (text.length <= 100) {
+      Meteor.call('ideas.insert', FlowRouter.getParam('id'), text, (error) => {
         if (error) {
           console.log(error);
-        //  alert(error.error);
+          //  alert(error.error);
         } else {
           target.text.value = '';
+          $('input').focus();
         }
       });
     }
 
   },
-  'click .removeIdea'(){
-    Meteor.call('ideas.remove',this._id, (error)=>{
+  'click .removeIdea' () {
+    Meteor.call('ideas.remove', this._id, (error) => {
       if (error) {
         console.log(error);
-      //  alert(error.error);
+        //  alert(error.error);
       }
     });
   },
-  'click .hideIdea'(event){
+  'click .hideIdea' (event) {
     console.log(this._id);
-    Meteor.call('ideas.hide',this._id, (error)=>{
+    Meteor.call('ideas.hide', this._id, (error) => {
       if (error) {
         console.log(error);
-      //  alert(error.error);
+        //  alert(error.error);
       }
     });
   },
-  'click .showIdea'(event){
+  'click .showIdea' (event) {
     console.log(this._id);
-    Meteor.call('ideas.show',this._id, (error)=>{
+    Meteor.call('ideas.show', this._id, (error) => {
       if (error) {
         console.log(error);
-      //  alert(error.error);
+        //  alert(error.error);
       }
     });
   },
-  'click .toggleHidden'(e,t){
+  'click .toggleHidden' (e, t) {
     t.includeHidden.set(!t.includeHidden.get());
   }
 });
