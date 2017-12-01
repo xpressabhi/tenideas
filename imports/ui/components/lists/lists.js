@@ -11,6 +11,9 @@ Template.lists.onCreated(function () {
   });
 
 });
+Template.lists.onRendered(function(){
+  $('input').focus();
+});
 
 Template.lists.helpers({
   showRemove(){

@@ -12,6 +12,9 @@ Template.ideas.onCreated(function () {
       Meteor.subscribe('lists.one',FlowRouter.getParam('id'));
   });
 });
+Template.ideas.onRendered(function(){
+  $('input').focus();
+});
 
 Template.ideas.helpers({
   listPresent(){

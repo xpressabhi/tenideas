@@ -1,10 +1,10 @@
 <template name="lists">
     <form class="list-add">
       <div class="input-group">
-        <input type="text" class="form-control input-lg" name="title" placeholder="Ideas for ...(2 words to 10 words)">
+        <input type="text" class="form-control input-lg" name="title" placeholder="Ideas for ...(2 words to 10 words)" autofocus>
         <div class="input-group-btn">
           <button class="btn btn-lg {{#if titleSave}}
-        btn-primary
+        btn-success
         {{else}}
         btn-danger
       {{/if}} {{#unless titleSave}}
@@ -29,7 +29,7 @@
       </p>
     </div>
   {{else}}
-    <p class="lead">No List created.</p>
+    <p class="lead">No List created. Add one list to start with, once you add new list, it will take you to idea addition page.</p>
   {{/each}}
 
 </template>

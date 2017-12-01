@@ -8,10 +8,10 @@
         minutes</p>
       <form class="idea-add">
         <div class="input-group">
-          <input type="text" class="form-control input-lg" name="text" placeholder="I will ..(10 words max)">
+          <input type="text" class="form-control input-lg" name="text" placeholder="I will ..(10 words max)" autofocus>
           <div class="input-group-btn">
             <button class="btn btn-lg {{#if textSave}}
-            btn-primary
+            btn-success
             {{else}}
             btn-danger
           {{/if}} {{#unless textSave}}
@@ -43,7 +43,6 @@
       <p class="lead">Ideas added to list #{{ideaCount}}</p>
     {{/if}}
   {{/if}}
-  <a href="/lists" class="btn btn-info">Go to Lists</a>
   {{#each ideas}}
     <p class="lead ideaText">{{text}}
       <i class="fa fa-times fa-lg pull-right removeIdea" data-toggle="tooltip" data-placement="top" title="Remove me" aria-hidden="true"></i>
