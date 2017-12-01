@@ -70,16 +70,16 @@ Template.lists.events({
     console.log(title.length);
     if(title.length > 6 && title.length<=100){
       Meteor.call('lists.insert', title, (error,result) => {
-        console.log('we are here');
+    //    console.log('we are here');
         if (error) {
           console.log(error);
         //  alert(error.error);
         } else {
-          console.log(result);
+        //  console.log(result);
           t.showForm.set(false);
-        //  FlowRouter.go('/ideas/'+result);
+          FlowRouter.go('/ideas/'+result);
           target.title.value = '';
-          console.log(target.title.value);
+        //  console.log(target.title.value);
         }
       });
     }
