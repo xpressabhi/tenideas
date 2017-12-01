@@ -1,12 +1,14 @@
 <template name="oneQuote">
   {{#if quote}}
-  <div class="well well-lg">
-    <blockquote class="blockquote-reverse">
-      <p>“{{quote.text}}”</p>
-      <footer>{{quote.saidBy}}
-        <cite title="Source Title"></cite>
-      </footer>
-    </blockquote>
-  </div>
+    <div class="container">
+      <div class="well well-lg">
+        <blockquote class="blockquote-reverse">
+          <p>“{{quote.text}}”</p>
+          <footer>{{quote.saidBy}}
+            <cite title="Source Title"></cite>
+          </footer>
+        </blockquote>
+      </div>
+    </div>
   {{/if}}
 </template>

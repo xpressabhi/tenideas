@@ -10,6 +10,23 @@ Template.nav.helpers({
    const user = Meteor.user();
   // console.log(user);
    return user && user.profile && user.profile.firstName;
+ },
+ gravatorUrl: function() {
+   const user = Meteor.user();
+   const email = user && user.emails && user.emails[0].address;
+   let url;
+   if (email) {
+     var options = {
+       secure: true
+     };
+
+     //  var md5Hash = Gravatar.hash(email);
+     // 5658ffccee7f0ebfda2b226238b1eb6e
+
+     url = Gravatar.imageUrl(email, options);
+  }
+   return url;
+
  }
 });
 
