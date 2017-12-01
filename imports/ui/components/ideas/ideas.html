@@ -7,24 +7,22 @@
         {{timeLapsed}}
         minutes</p>
       <form class="idea-add">
-        <div class="form-group">
-          {{#unless textSave}}
-            <p class="lead">
-              Shorten idea length by
-              {{shortenBy}}
-              to add.</p>
-          {{/unless}}
-          <textarea class="form-control input-lg" name="text" placeholder="I will ... (write in max 10 words)." rows="3" required="required"></textarea>
+        <div class="input-group">
+          <input type="text" class="form-control" name="text" placeholder="I will do..">
+          <div class="input-group-btn">
+            <button class="btn {{#if textSave}}
+            btn-primary
+            {{else}}
+            btn-danger
+          {{/if}} {{#unless textSave}}
+            disabled
+          {{/unless}}" type="submit">
+              <i class="glyphicon glyphicon-plus"></i>
+            </button>
+          </div>
         </div>
-        <input type="submit" name="submit" class="btn {{#if textSave}}
-          btn-primary
-          {{else}}
-          btn-danger
-        {{/if}} btn-lg btn-block {{#unless textSave}}
-          disabled
-        {{/unless}}" value="Add Idea">
-
       </form>
+
     {{else}}
       <p class="lead">Added 10 ideas in
         {{timeTakenforTen}}
@@ -47,9 +45,9 @@
   {{/if}}
   <a href="/lists" class="btn btn-info">Go to Lists</a>
   {{#each ideas}}
-    <hr>
-    <p class="lead ideaText">{{text}} <i class="fa fa-times fa-lg pull-right removeIdea" data-toggle="tooltip" data-placement="top"
-   title="Remove me" aria-hidden="true"></i></p>
+    <p class="lead ideaText">{{text}}
+      <i class="fa fa-times fa-lg pull-right removeIdea" data-toggle="tooltip" data-placement="top" title="Remove me" aria-hidden="true"></i>
+    </p>
   {{else}}
     <p class="lead">
       {{#if list2Id}}

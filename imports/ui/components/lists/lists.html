@@ -1,28 +1,32 @@
 <template name="lists">
-  <form class="list-add">
-    <div class="form-group">
-      {{#unless titleSave}}
-        <p class="lead">
-          Shorten text length by
-          {{shortenBy}}
-          to create list.</p>
-      {{/unless}}
-      <textarea id="titleId" class="form-control input-lg" name="title" placeholder="10 Ideas for ... (write in max 10 words)." rows="3" required="required"></textarea>
-    </div>
-    <input type="submit" name="submit" class="btn {{#if titleSave}}
-      btn-primary
-      {{else}}
-      btn-danger
-    {{/if}} btn-lg btn-block {{#unless titleSave}}
-      disabled
-    {{/unless}}" value="Create list">
-  </form>
+    <form class="list-add">
+      <div class="input-group">
+        <input type="text" class="form-control" name="title" placeholder="list for idea...">
+        <div class="input-group-btn">
+          <button class="btn {{#if titleSave}}
+        btn-primary
+        {{else}}
+        btn-danger
+      {{/if}} {{#unless titleSave}}
+        disabled
+      {{/unless}}" type="submit">
+            <i class="glyphicon glyphicon-plus"></i>
+          </button>
+        </div>
+      </div>
+    </form>
   <br>
   {{#each lists}}
-  <div class="listTitle">
-    <p class="lead"><span class="hideDate pull-right">{{createdDate createdAt}}</span>
-      <a href="/ideas/{{_id}}">{{title}}</a>
-    </p>
+    <div class="listTitle">
+      <p class="lead">
+        <span class="hideDate pull-right">{{createdDate createdAt}}
+          {{#if showRemove}}
+
+            <i class="fa fa-times fa-lg removeList" data-toggle="tooltip" data-placement="top" title="Remove me" aria-hidden="true"></i>
+          {{/if}}
+        </span>
+        <a href="/ideas/{{_id}}">{{title}}({{ideasCount}})</a>
+      </p>
     </div>
   {{else}}
     <p class="lead">No List created.</p>

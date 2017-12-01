@@ -9,14 +9,19 @@ Meteor.methods({
     check(listId, String);
     check(text, String);
 
-    return Ideas.insert({
+    Ideas.insert({
       listId:listId,
       text:text
     });
+    Meteor.call('list.updateCount',listId);
+    return;
   },
   'ideas.remove'(ideaId){
     check(ideaId, String);
-    return Ideas.remove({_id:ideaId});
+    const listId= Ideas.findOne({_id:ideaId}).listId;
+    Ideas.remove({_id:ideaId});
+    Meteor.call('list.updateCount',listId);
+    return;
   },
   'ideas.hide'(ideaId){
     check(ideaId, String);

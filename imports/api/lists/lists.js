@@ -13,6 +13,11 @@ Lists.schema = new SimpleSchema({
     type:Boolean,
     defaultValue:false
   },
+  ideasCount:{
+    type:Number,
+    defaultValue:0,
+    min:0
+  },
   createdAt: {
     type: Date,
     autoValue: function() {

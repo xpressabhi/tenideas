@@ -66,7 +66,7 @@ Template.ideas.helpers({
     return Template.instance().textLength.get() <= 100;
   },
   shortenBy(){
-    return Template.instance().titleLength.get() - 100;
+    return Template.instance().textLength.get() - 100;
   }
 });
 
