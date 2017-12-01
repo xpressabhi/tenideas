@@ -19,7 +19,7 @@ Meteor.publish('ideas.all', function(listId, search) {
           $ne: true
         },
         text:regex
-      },{sort: {createdAt: -1}, limit: 10});
+      },{sort: {createdAt: -1}, limit: 20});
     }
     return Ideas.find({
       userId: this.userId,
@@ -28,7 +28,7 @@ Meteor.publish('ideas.all', function(listId, search) {
       },
       text:regex
 
-    },{sort: {createdAt: -1}, limit: 10});
+    },{sort: {createdAt: -1}, limit: 20});
 
 });
 
