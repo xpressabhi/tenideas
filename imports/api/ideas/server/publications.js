@@ -41,3 +41,11 @@ Meteor.publish('ideasCount', function(id) {
   }
   Counts.publish(this, 'ideas', Ideas.find());
 });
+
+Meteor.publish('ideasCount.user', function() {
+  if (!this.userId) {
+    return this.ready();
+  }
+  console.log('counting');
+  Counts.publish(this, 'ideas.user', Ideas.find({userId:this.userId}));
+});

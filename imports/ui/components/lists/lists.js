@@ -39,6 +39,10 @@ Template.lists.helpers({
   },
   shortenBy(){
     return Template.instance().titleLength.get() - 100;
+  },
+  plusOne(num){
+    const count = Lists.find().count();
+    return count - num;
   }
 });
 

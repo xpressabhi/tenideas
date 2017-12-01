@@ -12,6 +12,7 @@ Template.ideas.onCreated(function() {
 
   self.autorun(() => {
     const id = FlowRouter.getParam('id');
+    Meteor.subscribe('ideasCount.user');
     self.subscribe('lists.one', id);
     self.subscribe("ideas.all", id, this.searchQuery.get(), () => {
       setTimeout(() => {
@@ -46,6 +47,9 @@ Template.ideas.helpers({
   },
   ideaCount() {
     return Ideas.find({}).count();
+  },
+  remainingCount(){
+    return 10 - Ideas.find({}).count();
   },
   allowToAdd() {
     if (FlowRouter.getParam('id') && Ideas.find({}).count() < 10)
@@ -92,9 +96,16 @@ Template.ideas.helpers({
     return Template.instance().textLength.get() - 100;
   },
   searching() {
-    console.log('reading');
+  //  console.log('reading');
     return Template.instance().searching.get();
-  }
+  },
+  plusOne(num){
+    const count = Ideas.find().count();
+    return count - num;
+  },
+  userIdeasCount: function() {
+    return Counts.get('ideas.user');
+  },
 });
 
 Template.ideas.events({

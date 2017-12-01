@@ -1,4 +1,5 @@
 <template name="ideas">
+  <p class="lead">You have added total {{userIdeasCount}} ideas. Keep adding.</p>
   <div class="form-group pull-right">
     <input type="text" class="form-control" id="" name="search" placeholder="Start typing to search...">
   </div>
@@ -34,7 +35,7 @@
     {{/if}}
   {{else}}
     {{#if listPresent}}
-      <p class="lead">Ideas from all lists.</p>
+      <p class="lead">Latest {{ideaCount}} Ideas</p>
     {{else}}
       <p class="lead">No such list. Create one to start.</p>
     {{/if}}
@@ -43,11 +44,11 @@
   <br>
   {{#if allowToAdd}}
     {{#if listPresent}}
-      <p class="lead">Ideas added to list #{{ideaCount}}</p>
+      <p class="lead">Add #{{remainingCount}} more to complete this list.</p>
     {{/if}}
   {{/if}}
   {{#each ideas}}
-    <p class="lead ideaText">{{text}}
+    <p class="lead ideaText">#{{plusOne @index}}: {{text}}
       <i class="fa fa-times fa-lg pull-right removeIdea" data-toggle="tooltip" data-placement="top" title="Remove me" aria-hidden="true"></i>
     </p>
   {{else}}
