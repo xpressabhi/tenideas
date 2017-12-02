@@ -4,9 +4,14 @@ import './quotes.html';
 
 Template.quotes.onCreated(function () {
   const self=this;
+  this.searchQuery = new ReactiveVar('');
+  this.searching = new ReactiveVar(false);
   self.autorun(()=>{
-    console.log('subscribing');
-    Meteor.subscribe('quotes.all');
+    self.subscribe("quotes.all",this.searchQuery.get(), () => {
+      setTimeout(() => {
+        this.searching.set(false);
+      }, 300);
+    });
   });
 
 });
@@ -21,6 +26,14 @@ Template.quotes.helpers({
 });
 
 Template.quotes.events({
+  'keyup [name="search"]' (event, template) {
+    let value = event.target.value.trim();
+  //  console.log(value);
+    if (!value || value === '')
+      value = '';
+      template.searching.set(true);
+      template.searchQuery.set(value);
+  },
   'click .toggleVisibility'(event){
     Meteor.call('quotes.toggle',this._id);
   },

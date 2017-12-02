@@ -3,11 +3,25 @@
 import {Meteor} from 'meteor/meteor';
 import {Quotes} from '../quotes.js';
 
-Meteor.publish('quotes.all', function() {
+Meteor.publish('quotes.all', function(search) {
+  check(search , String);
+//  check(listId , String);
   if (!this.userId) {
     return this.ready();
   }
-  return Quotes.find({});
+  let query = [{}];
+  if (search && search.length > 2) {
+    let regex = new RegExp(search, 'i');
+
+    query = [
+      {
+        text: regex
+      }, {
+        saidBy: regex
+      }
+    ];
+  }
+  return Quotes.find({$or:query});
 });
 
 Meteor.publish('quotes.one', function() {
