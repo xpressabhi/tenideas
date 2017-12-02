@@ -13,7 +13,6 @@
 
   </form>
   {{#each quotes}} <hr>
-  <div class="well well-lg">
     <div class="toggleVisibility">
       {{#if show}}
         <span class="label label-success">Visible</span>
@@ -21,13 +20,11 @@
       <span class="label label-danger">Hidden</span>
       {{/if}}
     </div>
-    <p class="lead">{{title}}</p>
     <blockquote class="blockquote-reverse">
       <p>“{{text}}”</p>
       <footer>{{saidBy}}
         <cite title="Source Title"></cite>
       </footer>
     </blockquote>
-  </div>
   {{/each}}
 </template>
