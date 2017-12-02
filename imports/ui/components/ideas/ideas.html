@@ -1,18 +1,15 @@
 <template name="ideas">
-  <p class="lead">You have added total {{userIdeasCount}} ideas. Keep adding.</p>
   <div class="form-group pull-right">
-    <input type="text" class="form-control" id="" name="search" placeholder="Start typing to search...">
+    <input type="text" class="form-control textInput" id="" name="search" placeholder="Start typing to search...">
   </div>
+  <p class="lead">You have added total {{userIdeasCount}} ideas. Keep adding.</p>
   {{#if list2Id}}
     <h3>10 ideas for
-      {{listTitle}}</h3>
+      : {{listTitle}}</h3>
     {{#if allowToAdd}}
-      <p class="lead">Time elapsed since list created:
-        {{timeLapsed}}
-        minutes</p>
       <form class="idea-add">
         <div class="input-group">
-          <input type="text" class="form-control input-lg" name="text" placeholder="I will ..(10 words max)" autofocus>
+          <input type="text" class="form-control input-lg textInput" name="text" placeholder="I will ..(10 words max)" autofocus>
           <div class="input-group-btn">
             <button class="btn btn-lg {{#if textSave}}
             btn-success
@@ -25,7 +22,11 @@
             </button>
           </div>
         </div>
-      </form>
+      </form> <hr>
+      <p class="lead">Time elapsed since list created:
+        {{timeLapsed}}
+        minutes</p>
+
 
     {{else}}
       <p class="lead">Added 10 ideas in

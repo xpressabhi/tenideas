@@ -1,9 +1,9 @@
 <template name="lists">
     <form class="list-add">
       <div class="input-group">
-        <input type="text" class="form-control input-lg" name="title" placeholder="Ideas for ...(2 words to 10 words)" autofocus>
+        <input type="text" class="form-control input-lg textInput" name="title" placeholder="Ideas for ...(2 words to 10 words)" autofocus>
         <div class="input-group-btn">
-          <button class="btn btn-lg {{#if titleSave}}
+          <button class="btn btn-lg saveButton {{#if titleSave}}
         btn-success
         {{else}}
         btn-danger
