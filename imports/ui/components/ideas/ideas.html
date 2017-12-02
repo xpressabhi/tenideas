@@ -25,27 +25,17 @@
       </form> <hr>
       <p class="lead">Time elapsed since list created:
         {{timeLapsed}}
-        minutes</p>
-
-
+        minutes, add {{remainingCount}} more to complete this list.</p>
     {{else}}
       <p class="lead">Added 10 ideas in
         {{timeTakenforTen}}
         minutes.</p>
-
     {{/if}}
   {{else}}
     {{#if listPresent}}
       <p class="lead">Latest {{ideaCount}} Ideas</p>
     {{else}}
       <p class="lead">No such list. Create one to start.</p>
-    {{/if}}
-
-  {{/if}}
-  <br>
-  {{#if allowToAdd}}
-    {{#if listPresent}}
-      <p class="lead">Add #{{remainingCount}} more to complete this list.</p>
     {{/if}}
   {{/if}}
   {{#each ideas}}
