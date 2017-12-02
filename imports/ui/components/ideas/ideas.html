@@ -1,6 +1,6 @@
 <template name="ideas">
   <div class="form-group pull-right">
-    <input type="text" class="form-control textInput" id="" name="search" placeholder="Start typing to search...">
+    <input type="text" class="form-control textInput lead" id="" name="search" placeholder="Start typing to search...">
   </div>
   <p class="lead">You have added total {{userIdeasCount}} ideas. Keep adding.</p>
   {{#if list2Id}}
@@ -9,7 +9,7 @@
     {{#if allowToAdd}}
       <form class="idea-add">
         <div class="input-group">
-          <input type="text" class="form-control input-lg textInput" name="text" placeholder="I will ..(10 words max)" autofocus>
+          <input type="text" class="form-control input-lg textInput lead" name="text" placeholder="I will ..(10 words max)" autofocus>
           <div class="input-group-btn">
             <button class="btn btn-lg {{#if textSave}}
             btn-success
