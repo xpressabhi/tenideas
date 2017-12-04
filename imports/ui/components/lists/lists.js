@@ -22,6 +22,11 @@ Template.lists.helpers({
     if(count && count>0) return false;
     return true;
   },
+  itsNew(){
+    const count =  Lists.findOne({_id:this._id}).ideasCount;
+    if(count && count > 9) return false;
+    return true;
+  },
   newList(){
     return Template.instance().showForm.get();
   },

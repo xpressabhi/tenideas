@@ -35,7 +35,9 @@
           </div>
         </div>
       </form>
-      {{else}}
+      {{else}}{{#if itsNew}}
+        <span class="label label-warning">New</span>
+      {{/if}}
       <p class="lead titleText">#{{plusOne @index}}:
         <a href="/ideas/{{_id}}">{{title}}({{ideasCount}})</a>
         <div class="btn-group btn-group pull-right actionBtn">
