@@ -38,24 +38,15 @@
       {{else}}
       <p class="lead titleText">#{{plusOne @index}}:
         <a href="/ideas/{{_id}}">{{title}}({{ideasCount}})</a>
-        <div class="dropdown pull-right actionDropDown">
-          <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">
-            <small>{{createdDate createdAt}}</small>
-            <span class="caret"></span></button>
-          <ul class="dropdown-menu">
-            <li>
-              <a href="#" class="editMe">
-                <i class="fa fa-pencil editMe" aria-hidden="true"></i>
-                Edit</a>
-            </li>
-            {{#if showRemove}}
-            <li>
-              <a href="#" class="removeList">
-                <i class="fa fa-times" aria-hidden="true"></i>
-                Delete</a>
-            </li>
-            {{/if}}
-          </ul>
+        <div class="btn-group btn-group pull-right actionBtn">
+          <button type="button" class="btn btn-info editMe">
+            <i class="fa fa-pencil editMe" aria-hidden="true"></i>
+          </button>
+          <button type="button" class="btn btn-danger removeList {{#unless showRemove}}
+            disabled
+          {{/unless}}">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </button>
         </div>
       </p>
       {{/if}}

@@ -67,22 +67,16 @@
     {{else}}
       <p class="lead ideaText">#{{plusOne @index}}:
         {{text}}
-        <div class="dropdown pull-right actionDropDown">
-          <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">
-            <small>{{createdDate createdAt}}</small>
-            <span class="caret"></span></button>
-          <ul class="dropdown-menu">
-            <li>
-              <a href="#" class="editMe">
-                <i class="fa fa-pencil" aria-hidden="true"></i>
-                Edit</a>
-            </li>
-            <li>
-              <a href="#" class="removeIdea">
-                <i class="fa fa-times" aria-hidden="true"></i>
-                Delete</a>
-            </li>
-          </ul>
+        <div class="btn-group btn-group pull-right actionBtn">
+          <button type="button" class="btn btn-primary createList">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+          </button>
+          <button type="button" class="btn btn-info editMe">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+          </button>
+          <button type="button" class="btn btn-danger removeIdea">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </button>
         </div>
       </p>
     {{/if}}

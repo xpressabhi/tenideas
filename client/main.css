@@ -2,15 +2,15 @@ body {
   padding-top: 20px;
 }
 
-.actionDropDown{
+.actionBtn{
   display: none;
 }
 
-.ideaText:hover .actionDropDown {
+.ideaText:hover .actionBtn {
   display: block;
   cursor: pointer;
 }
-.titleText:hover .actionDropDown {
+.titleText:hover .actionBtn {
   display: block;
   cursor: pointer;
 }

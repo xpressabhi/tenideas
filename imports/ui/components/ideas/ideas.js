@@ -220,5 +220,25 @@ Template.ideas.events({
   },
   'click .toggleHidden' (e, t) {
     t.includeHidden.set(!t.includeHidden.get());
+  },
+  'click .createList'(e,t){
+    e.preventDefault();
+    console.log('creating list', this.text);
+    const title=this.text;
+    if(title.length > 6 && title.length<=100){
+      Meteor.call('lists.insert', title, (error,result) => {
+    //    console.log('we are here');
+        if (error) {
+          console.log(error);
+        //  alert(error.error);
+        } else {
+        //  console.log(result);
+        //  t.showForm.set(false);
+          FlowRouter.go('/ideas/'+result);
+        //  target.title.value = '';
+        //  console.log(target.title.value);
+        }
+      });
+    }
   }
 });
