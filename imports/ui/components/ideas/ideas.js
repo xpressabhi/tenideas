@@ -6,10 +6,10 @@ import './ideas.html';
 Template.ideas.onCreated(function() {
   const self = this;
   self.includeHidden = new ReactiveVar(false);
-  this.textLength = new ReactiveVar(0);
-  this.searchQuery = new ReactiveVar('');
-  this.searching = new ReactiveVar(false);
-
+  self.textLength = new ReactiveVar(0);
+  self.searchQuery = new ReactiveVar('');
+  self.searching = new ReactiveVar(false);
+  self.selectedId= new ReactiveVar();
   self.autorun(() => {
     const id = FlowRouter.getParam('id');
     Meteor.subscribe('ideasCount.user');
@@ -106,9 +106,31 @@ Template.ideas.helpers({
   userIdeasCount: function() {
     return Counts.get('ideas.user');
   },
+  editing(){
+    return Template.instance().selectedId.get() === this._id;
+  },
+  editText(){
+  //  console.log('text');
+    return Ideas.findOne({_id:Template.instance().selectedId.get()}).text;
+  }
 });
 
 Template.ideas.events({
+  'click .editMe'(e,t){
+//    console.log('editing');
+    e.preventDefault();
+     t.selectedId.set(this._id);
+  },
+  'dblclick .ideaText'(e,t){
+    console.log('dbclick');
+    e.preventDefault();
+     t.selectedId.set(this._id);
+  },
+  'blur [name="textEdit"]'(e,t){
+  //  console.log('blur');
+  //  e.preventDefault();
+     t.selectedId.set('');
+  },
   'keyup [name="text"]' (event, template) {
     let value = event.target.value.trim();
     template.textLength.set(value.length);
@@ -120,6 +142,21 @@ Template.ideas.events({
       value = '';
       template.searching.set(true);
       template.searchQuery.set(value);
+  },
+  'keyup [name="textEdit"]' (event,t) {
+  //  event.preventDefault();
+    const target = event.target;
+    const text = target.value.trim();
+//    console.log(text);
+    if (text.length> 5 && text.length <= 100) {
+      Meteor.call('ideas.update', this._id, text, (error) => {
+        if (error) {
+          console.log(error);
+        } else {
+
+        }
+      });
+    }
   },
   'submit .idea-add' (event) {
     event.preventDefault();
@@ -137,6 +174,23 @@ Template.ideas.events({
       });
     }
 
+  },
+  'submit .idea-edit' (event,t) {
+    event.preventDefault();
+    const target = event.target;
+    const text = target.textEdit.value.trim();
+    if (text.length <= 100) {
+      Meteor.call('ideas.update', this._id, text, (error) => {
+        if (error) {
+          console.log(error);
+          //  alert(error.error);
+        } else {
+          target.textEdit.value = '';
+          $('input').focus();
+          t.selectedId.set('');
+        }
+      });
+    }
   },
   'click .removeIdea' () {
     Meteor.call('ideas.remove', this._id, (error) => {

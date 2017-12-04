@@ -2,14 +2,16 @@
   <div class="form-group pull-right">
     <input type="text" class="form-control textInput lead" id="" name="search" placeholder="Start typing to search...">
   </div>
-  <p class="lead">You have added total {{userIdeasCount}} ideas. Keep adding.</p>
+  <p class="lead">You have added total
+    {{userIdeasCount}}
+    ideas. Keep adding.</p>
   {{#if list2Id}}
-    <h3>10 ideas for
-      : {{listTitle}}</h3>
+    <h3>10 ideas for :
+      {{listTitle}}</h3>
     {{#if allowToAdd}}
       <form class="idea-add">
         <div class="input-group">
-          <input type="text" class="form-control input-lg textInput lead" name="text" placeholder="I will ..(10 words max)" autofocus>
+          <input type="text" class="form-control input-lg textInput lead" name="text" placeholder="I will ..(10 words max)" autofocus="autofocus">
           <div class="input-group-btn">
             <button class="btn btn-lg {{#if textSave}}
             btn-success
@@ -22,10 +24,13 @@
             </button>
           </div>
         </div>
-      </form> <hr>
+      </form>
+      <hr>
       <p class="lead">Time elapsed since list created:
         {{timeLapsed}}
-        minutes, add {{remainingCount}} more to complete this list.</p>
+        minutes, add
+        {{remainingCount}}
+        more to complete this list.</p>
     {{else}}
       <p class="lead">Added 10 ideas in
         {{timeTakenforTen}}
@@ -33,15 +38,55 @@
     {{/if}}
   {{else}}
     {{#if listPresent}}
-      <p class="lead">Latest {{ideaCount}} Ideas</p>
+      <p class="lead">Latest
+        {{ideaCount}}
+        Ideas</p>
     {{else}}
       <p class="lead">No such list. Create one to start.</p>
     {{/if}}
   {{/if}}
   {{#each ideas}}
-    <p class="lead ideaText">#{{plusOne @index}}: {{text}}
-      <i class="fa fa-times fa-lg pull-right removeIdea" data-toggle="tooltip" data-placement="top" title="Remove me" aria-hidden="true"></i>
-    </p>
+    {{#if editing}}
+      <form class="idea-edit">
+        <div class="input-group">
+          <input type="text" class="form-control input-lg textInput lead" name="textEdit" value="{{editText}}" placeholder="I will ..(10 words max)" autofocus="autofocus">
+          <div class="input-group-btn">
+            <button class="btn btn-lg {{#if textSave}}
+        btn-success
+        {{else}}
+        btn-danger
+      {{/if}} {{#unless textSave}}
+        disabled
+      {{/unless}}" type="submit">
+              <i class="glyphicon glyphicon-ok"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+      <br>
+    {{else}}
+      <p class="lead ideaText">#{{plusOne @index}}:
+        {{text}}
+        <div class="dropdown pull-right actionDropDown">
+          <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">
+            <small>{{createdDate createdAt}}</small>
+            <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="#" class="editMe">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+                Edit</a>
+            </li>
+            <li>
+              <a href="#" class="removeIdea">
+                <i class="fa fa-times" aria-hidden="true"></i>
+                Delete</a>
+            </li>
+          </ul>
+        </div>
+      </p>
+    {{/if}}
+
   {{else}}
     <p class="lead">
       {{#if list2Id}}

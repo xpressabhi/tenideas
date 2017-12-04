@@ -23,6 +23,15 @@ Meteor.methods({
     Meteor.call('list.updateCount',listId);
     return;
   },
+  'ideas.update'(ideaId,text){
+    check(ideaId, String);
+    check(text, String);
+    return Ideas.update({_id:ideaId},{
+      $set:{
+        text:text
+      }
+    });
+  },
   'ideas.hide'(ideaId){
     check(ideaId, String);
     return Ideas.update({_id:ideaId},{

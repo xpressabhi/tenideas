@@ -18,15 +18,47 @@
   <br>
   {{#each lists}}
     <div class="listTitle">
-      <p class="lead">#{{plusOne @index}}:
-        <span class="hideDate pull-right">{{createdDate createdAt}}
-          {{#if showRemove}}
-
-            <i class="fa fa-times fa-lg removeList" data-toggle="tooltip" data-placement="top" title="Remove me" aria-hidden="true"></i>
-          {{/if}}
-        </span>
+      {{#if editing}}
+      <form class="list-edit">
+        <div class="input-group">
+          <input type="text" class="form-control input-lg textInput lead" name="titleEdit" value="{{editText}}" placeholder="Ideas for ...(2 words to 10 words)" autofocus>
+          <div class="input-group-btn">
+            <button class="btn btn-lg saveButton {{#if titleSave}}
+          btn-success
+          {{else}}
+          btn-danger
+        {{/if}} {{#unless titleSave}}
+          disabled
+        {{/unless}}" type="submit">
+              <i class="glyphicon glyphicon-ok"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+      {{else}}
+      <p class="lead titleText">#{{plusOne @index}}:
         <a href="/ideas/{{_id}}">{{title}}({{ideasCount}})</a>
+        <div class="dropdown pull-right actionDropDown">
+          <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">
+            <small>{{createdDate createdAt}}</small>
+            <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="#" class="editMe">
+                <i class="fa fa-pencil editMe" aria-hidden="true"></i>
+                Edit</a>
+            </li>
+            {{#if showRemove}}
+            <li>
+              <a href="#" class="removeList">
+                <i class="fa fa-times" aria-hidden="true"></i>
+                Delete</a>
+            </li>
+            {{/if}}
+          </ul>
+        </div>
       </p>
+      {{/if}}
     </div>
   {{else}}
     <p class="lead">No List created. Add one list to start with, once you add new list, it will take you to idea addition page.</p>

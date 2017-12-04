@@ -11,6 +11,18 @@ Meteor.methods({
 
     return Lists.insert({title: title});
   },
+  'lists.update'(id,title){
+    check(title, String);
+    check(id, String);
+    Lists.update({
+      _id: id
+    }, {
+      $set: {
+        title: title
+      }
+    });
+
+  },
   'lists.remove' (listId) {
     check(listId, String);
     console.log('deleting');
