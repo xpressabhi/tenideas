@@ -162,7 +162,7 @@ Template.ideas.events({
     event.preventDefault();
     const target = event.target;
     const text = target.text.value.trim();
-    if (text.length <= 100) {
+    if (text.length> 5 && text.length <= 100) {
       Meteor.call('ideas.insert', FlowRouter.getParam('id'), text, (error) => {
         if (error) {
           console.log(error);
@@ -179,7 +179,7 @@ Template.ideas.events({
     event.preventDefault();
     const target = event.target;
     const text = target.textEdit.value.trim();
-    if (text.length <= 100) {
+    if (text.length > 5 && text.length <= 100) {
       Meteor.call('ideas.update', this._id, text, (error) => {
         if (error) {
           console.log(error);
@@ -225,7 +225,7 @@ Template.ideas.events({
     e.preventDefault();
     console.log('creating list', this.text);
     const title=this.text;
-    if(title.length > 6 && title.length<=100){
+    if(title.length > 5 && title.length<=100){
       Meteor.call('lists.insert', title, (error,result) => {
     //    console.log('we are here');
         if (error) {
