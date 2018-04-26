@@ -1,5 +1,5 @@
 var Twit = require('twit')
-
+import fs from 'fs';
 var T = new Twit({
   consumer_key: Meteor.settings.twit.consumer_key,
   consumer_secret: Meteor.settings.twit.consumer_secret,
@@ -10,14 +10,51 @@ var T = new Twit({
 //
 //  tweet 'hello world!'
 //
+
+let dt = moment("20180406", "YYYYMMDD").fromNow();
+let dtt = (new Date()).getTime();
+var txt = `I luv UPI but hate to wait for refund, Waiting since Apr 6th(${dt}) for refund @AxisBank @AxisBankSupport @UPI_NPCI @NPCI_BHIM @ICICIBank Pls help me to get refund for two failed transaction Rs 4050 each /${dtt}`;
+
 Meteor.methods({
   "tweet" () {
-    let dt= moment("20180406", "YYYYMMDD").fromNow();
-    let dtt = (new Date()).getTime();
-    let txt= `I luv UPI but hate to wait for refund, Waiting since Apr 6th(${dt}) for refund @AxisBank @AxisBankSupport @UPI_NPCI @NPCI_BHIM @ICICIBank Pls help me to get refund for two failed transaction Rs 4050 each /${dtt}`;
     T.post('statuses/update', {
       status: txt
     }, function(err, data, response) {})
+  },
+  "imgtweet" () {
+    //
+    // post a tweet with media
+    //
+    var b64content = fs.readFileSync('assets/app/twt-img.png', {encoding: 'base64'})
+
+    // first we must post the media to Twitter
+    T.post('media/upload', {
+      media_data: b64content
+    }, function(err, data, response) {
+      // now we can assign alt text to the media, for use by screen readers and
+      // other text-based presentations and interpreters
+      var mediaIdStr = data.media_id_string
+      var altText = "Refund request to axis bank."
+      var meta_params = {
+        media_id: mediaIdStr,
+        alt_text: {
+          text: altText
+        }
+      }
+
+      T.post('media/metadata/create', meta_params, function(err, data, response) {
+        if (!err) {
+          // now we can reference the media and post a tweet (media will attach to the tweet)
+          var params = {
+            status: txt,
+            media_ids: [mediaIdStr]
+          }
+
+          T.post('statuses/update', params, function(err, data, response) {
+          })
+        }
+      })
+    })
   }
 });
 
@@ -25,31 +62,31 @@ SyncedCron.add({
   name: 'Refund reminder to axisbank',
   schedule: function(parser) {
     // parser is a later.parse object
-    return parser.text('every 2 minutes');
+    return parser.text('every 30 minutes');
   },
   job: function() {
-    Meteor.call('tweet', () => {});
+    Meteor.call('imgtweet', () => {});
     return;
   }
 });
 
 SyncedCron.config({
-    // Log job run details to console
-    log: false,
+  // Log job run details to console
+  log: false,
 
-    // Use a custom logger function (defaults to Meteor's logging package)
-    logger: null,
+  // Use a custom logger function (defaults to Meteor's logging package)
+  logger: null,
 
-    // Name of collection to use for synchronisation and logging
-    collectionName: 'cronHistory',
+  // Name of collection to use for synchronisation and logging
+  collectionName: 'cronHistory',
 
-    // Default to using localTime
-    utc: false,
+  // Default to using localTime
+  utc: false,
 
-    collectionTTL: 172800
-  });
+  collectionTTL: 172800
+});
 
-Meteor.startup(function () {
-    // The correct way
-    SyncedCron.start();
+Meteor.startup(function() {
+  // The correct way
+  SyncedCron.start();
 });
