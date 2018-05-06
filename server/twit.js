@@ -10,16 +10,23 @@ var T = new Twit({
 //
 //  tweet 'hello world!'
 //
-
+// amazon contest retweeting
 let dt = moment("20180406", "YYYYMMDD").fromNow();
 let dtt = (new Date()).getTime();
-var txt = `I luv UPI but hate to wait for refund, Waiting since Apr 6th(${dt}) for refund @AxisBank @AxisBankSupport @UPI_NPCI @NPCI_BHIM @ICICIBank Pls help me to get refund for two failed transaction Rs 4050 each /${dtt}`;
+var txt = `#ShareforOnePlus6 / ${dtt} https://twitter.com/amazonIN/status/989165874547515392`;
 
 Meteor.methods({
   "tweet" () {
     T.post('statuses/update', {
       status: txt
     }, function(err, data, response) {})
+  },
+  "rtweet" () {
+    T.post('statuses/retweet/:id', {
+      id: '989165874547515392'
+    }, function(err, data, response) {
+      console.log(data)
+    })
   },
   "imgtweet" () {
     //
@@ -50,8 +57,7 @@ Meteor.methods({
             media_ids: [mediaIdStr]
           }
 
-          T.post('statuses/update', params, function(err, data, response) {
-          })
+          T.post('statuses/update', params, function(err, data, response) {})
         }
       })
     })
@@ -62,10 +68,10 @@ SyncedCron.add({
   name: 'Refund reminder to axisbank',
   schedule: function(parser) {
     // parser is a later.parse object
-    return parser.text('every 30 minutes');
+    return parser.text('every 3 hours');
   },
   job: function() {
-    Meteor.call('imgtweet', () => {});
+    Meteor.call('tweet', () => {});
     return;
   }
 });
